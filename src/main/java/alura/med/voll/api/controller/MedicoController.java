@@ -1,14 +1,16 @@
 package alura.med.voll.api.controller;
 
+import alura.med.voll.api.dto.DatosListadoMedico;
 import alura.med.voll.api.dto.DatosregistroMedico;
 import alura.med.voll.api.model.Medico;
 import alura.med.voll.api.repository.MedicoRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/medicos")
@@ -20,5 +22,10 @@ public class MedicoController {
     @PostMapping
     public void registrarMedico(@RequestBody @Valid DatosregistroMedico datosregistroMedico) {
     medicoRepository.save(new Medico(datosregistroMedico));
+    }
+
+    @GetMapping
+    public Page<DatosListadoMedico> listadoMedicos(Pageable paginacion) {
+        return medicoRepository.findAll(paginacion).map(DatosListadoMedico::new);
     }
 }

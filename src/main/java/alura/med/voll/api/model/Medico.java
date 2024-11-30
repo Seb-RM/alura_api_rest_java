@@ -36,4 +36,20 @@ public class Medico {
         this.especialidad = datosregistroMedico.especialidad();
         this.direccion = new Direccion(datosregistroMedico.direccion());
     }
+
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public Object getEspecialidad() {
+        return this.especialidad;
+    }
+
+    public String getDocumento() {
+        return this.documento;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
 }
