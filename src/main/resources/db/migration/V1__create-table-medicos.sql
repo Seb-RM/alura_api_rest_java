@@ -1,5 +1,5 @@
 
-create TABLE medicos {
+create TABLE medicos (
     id bigint not null auto_increment,
     nombre varchar(100) not null,
     email varchar(100) not null unique,
@@ -12,4 +12,4 @@ create TABLE medicos {
     ciudad varchar(100) not null,
 
     primary key(id)
-};
+);
