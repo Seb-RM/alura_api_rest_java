@@ -1,5 +1,6 @@
 package alura.med.voll.api.model;
 
+import alura.med.voll.api.dto.DatosActualizarMedico;
 import alura.med.voll.api.dto.DatosregistroMedico;
 import alura.med.voll.api.medico.Especialidad;
 import jakarta.persistence.*;
@@ -51,5 +52,23 @@ public class Medico {
 
     public String getEmail() {
         return this.email;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void actualizarDatos(DatosActualizarMedico datosActualizarMedico) {
+        if(datosActualizarMedico.nombre() !=null) {
+            this.nombre = datosActualizarMedico.nombre();
+        }
+
+        if(datosActualizarMedico.documento() !=null) {
+            this.documento = datosActualizarMedico.documento();
+        }
+
+        if(datosActualizarMedico.direccion() !=null) {
+            this.direccion = direccion.actualizarDatos(datosActualizarMedico.direccion());
+        }
     }
 }
