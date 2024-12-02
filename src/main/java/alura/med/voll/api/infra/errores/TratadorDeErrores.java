@@ -1,4 +1,4 @@
-package alura.med.voll.api.infra;
+package alura.med.voll.api.infra.errores;
 
 
 import jakarta.persistence.EntityNotFoundException;
