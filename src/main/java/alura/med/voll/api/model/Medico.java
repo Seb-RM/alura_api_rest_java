@@ -40,26 +40,6 @@ public class Medico {
         this.direccion = new Direccion(datosregistroMedico.direccion());
     }
 
-    public String getNombre() {
-        return this.nombre;
-    }
-
-    public Object getEspecialidad() {
-        return this.especialidad;
-    }
-
-    public String getDocumento() {
-        return this.documento;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public Long getId() {
-        return this.id;
-    }
-
     public void actualizarDatos(DatosActualizarMedico datosActualizarMedico) {
         if(datosActualizarMedico.nombre() !=null) {
             this.nombre = datosActualizarMedico.nombre();
