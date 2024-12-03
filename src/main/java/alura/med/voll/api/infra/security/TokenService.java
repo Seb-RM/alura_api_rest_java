@@ -31,7 +31,7 @@ public class TokenService {
                     .sign(algorithm);
         } catch (JWTCreationException exception) {
             // Invalid Signing configuration / Couldn't convert Claims.
-            throw new RuntimeException();
+            throw new RuntimeException("error al generar token jwt", exception);
         }
     }
 
