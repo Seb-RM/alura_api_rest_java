@@ -59,15 +59,23 @@ public class TokenService {
 //            throw new RuntimeException("Verifier inválido");
 //        }
 //        return verifier.getSubject();
-        try {
-            var algoritmo = Algorithm.HMAC256(apiSecret);
-            return JWT.require(algoritmo)
-                    .withIssuer("API Voll.med")
-                    .build()
-                    .verify(token)
-                    .getSubject();
-        } catch (JWTVerificationException exception) {
-            throw new RuntimeException("Token JWT inválido o expirado!");
+        if (token == null) {
+            throw new RuntimeException();
         }
+        DecodedJWT verifier = null;
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(apiSecret); // validando firma
+            verifier = JWT.require(algorithm)
+                    .withIssuer("voll med")
+                    .build()
+                    .verify(token);
+            verifier.getSubject();
+        } catch (JWTVerificationException exception) {
+            System.out.println(exception.toString());
+        }
+        if (verifier.getSubject() == null) {
+            throw new RuntimeException("Verifier invalido");
+        }
+        return verifier.getSubject();
     }
 }
