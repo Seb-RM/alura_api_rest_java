@@ -1,6 +1,7 @@
 package alura.med.voll.api.controller;
 
 import alura.med.voll.api.dto.DatosAutenticacionUsusarios;
+import alura.med.voll.api.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,15 @@ public class AutenticacionController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity autenticarUsuario(@RequestBody DatosAutenticacionUsusarios datosAutenticacionUsusarios){
-        Authentication token = new UsernamePasswordAuthenticationToken(datosAutenticacionUsusarios.login(),
+        Authentication authenticationToken = new UsernamePasswordAuthenticationToken(datosAutenticacionUsusarios.login(),
                 datosAutenticacionUsusarios.clave());
-        authenticationManager.authenticate(token);
-        return ResponseEntity.ok().build();
+        authenticationManager.authenticate(authenticationToken);
+        var JWTtoken = tokenService.generarToken();
+        return ResponseEntity.ok(JWTtoken);
     }
 }
